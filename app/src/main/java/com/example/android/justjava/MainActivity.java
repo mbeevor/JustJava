@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -33,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         boolean hasWhippedCream = whippedCreamOption.isChecked();
         CheckBox chocolateOption = (CheckBox) findViewById(R.id.chocolate);
         boolean hasChocolate = chocolateOption.isChecked();
-        int finalPrice = calculatePrice();
-        TextView customerName = (TextView) findViewById(R.id.customer_name);
+        int finalPrice = calculatePrice(hasChocolate, hasWhippedCream);
+        EditText customerName = (EditText) findViewById(R.id.customer_name);
         String isCustomersName = customerName.getText().toString();
         String priceMessage = createOrderSummary(isCustomersName, finalPrice, hasWhippedCream, hasChocolate);
         displayMessage(priceMessage);
@@ -43,10 +44,21 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Calculates the price of the order.
      *
+     * @param addChocolate is if the user added chocolate to their order
+     * @param addWhippedCream is if the user added Whipped Cream to their order
      * @return total price
      */
-    private int calculatePrice() {
-        return quantity * 5;
+    private int calculatePrice(boolean addChocolate, boolean addWhippedCream) {
+        int coffeePrice = 5;
+
+        if (addWhippedCream) {
+            coffeePrice = coffeePrice + 1;
+        }
+
+        if (addChocolate) {
+            coffeePrice = coffeePrice + 2;
+        }
+        return quantity * coffeePrice;
     }
 
     /**
