@@ -1,0 +1,16 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Nur Java</string>
+    <string name="Toppings">Toppings;</string>
+    <string name="add_chocolate">Schokolade hinzufügen?</string>
+    <string name="add_whipped_cream">Schlagsahne hinzufügen?</string>
+    <string name="chocolate">Schokolade;</string>
+    <string name="customer_name">Name: <xliff:g id="customersName" example="Matthew">%s</xliff:g></string>
+    <string name="maximum">Sie können nicht bestellen, dass viele Kaffee</string>
+    <string name="minimum">Sie müssen mindestens einen Kaffee bestellen</string>
+    <string name="order">Auftrag</string>
+    <string name="quantity">Anzahl</string>
+    <string name="summary">Nur Java Bestellung</string>
+    <string name="thank_you">Vielen Dank</string>
+    <string name="total">Gesamt</string>
+    <string name="whipped_cream">Schlagsahne</string>
+</resources>

@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.android.justjava.R.id.chocolate;
+
 /**
  * This app displays an order form to order coffee.
  */
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         CheckBox whippedCreamOption = (CheckBox) findViewById(R.id.whipped_cream);
         boolean hasWhippedCream = whippedCreamOption.isChecked();
-        CheckBox chocolateOption = (CheckBox) findViewById(R.id.chocolate);
+        CheckBox chocolateOption = (CheckBox) findViewById(chocolate);
         boolean hasChocolate = chocolateOption.isChecked();
         int finalPrice = calculatePrice(hasChocolate, hasWhippedCream);
         EditText customerName = (EditText) findViewById(R.id.customer_name);
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java Order");
+        intent.putExtra(Intent.EXTRA_SUBJECT, R.string.summary);
         intent.putExtra(Intent.EXTRA_TEXT, priceMessage );
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
@@ -81,8 +83,12 @@ public class MainActivity extends AppCompatActivity {
      * @param addChocolate specifies if chocolate was added
      */
     private String createOrderSummary(String CustomersName, int price, boolean addWhippedCream, boolean addChocolate) {
-        String summary = "Name: " + CustomersName + "\nAdd whipped cream? " + addWhippedCream +
-                "\nAdd chocolate? " + addChocolate + "\nQuantity: " + quantity + "\nTotal: £" + price + "\nThank You!";
+        String summary = getString(R.string.customer_name, CustomersName) + ": " +
+                "\n" + getString(R.string.add_whipped_cream) + ": " + addWhippedCream +
+                "\n" + getString(R.string.add_chocolate) + ": " + addChocolate +
+                "\n" + getString(R.string.quantity) + ": " + quantity +
+                "\n" + getString(R.string.total) + ": " + price +
+                "\n" + getString(R.string.thank_you);
         return summary;
     }
 
@@ -93,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     public void increment(View view) {
         if (quantity >= 100) {
 
-            Toast.makeText(this, "You can't have that many coffees!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.maximum), Toast.LENGTH_SHORT).show();
             return;
         }
         quantity = quantity + 1;
@@ -106,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     public void decrement(View view) {
         if (quantity == 1) {
 
-            Toast.makeText(this, "You cannot have fewer than one coffee", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.minimum), Toast.LENGTH_SHORT).show();
             return;
         }
 
